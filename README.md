@@ -23,7 +23,7 @@ Zaawansowana aplikacja desktopowa do zarządzania harmonogramami pracowników pl
 
 ### Identyfikator
 - **Nazwa wewnętrzna**: `com.skaskiewicz.grafik-medyczny`
-- **Wersja**: 0.3.0
+- **Wersja**: 0.3.1
 - **Status**: Stabilna wersja produkcyjna
 
 ## Przeznaczenie
@@ -168,7 +168,7 @@ Jeśli chcielibyście w ten symboliczny sposób podziękować za program, bardzo
 Jeśli napotkasz błąd, problem lub chcesz zaproponować nową funkcjonalność, zachęcam do kontaktu poprzez zakładkę **Issues** w repozytorium projektu na GitHubie lub bezpośredni kontakt mailowy: sgm.kontakt@mailplus.pl.
 
 ### Informacje, które warto załączyć przy zgłoszeniu:
-- **Wersja aplikacji**: 0.3.0
+- **Wersja aplikacji**: 0.3.1
 - **System operacyjny**: np. Windows 11
 - **Opis problemu**: Szczegółowy opis tego, co się stało.
 - **Kroki do reprodukcji**: Krok po kroku, jak powtórzyć błąd.
