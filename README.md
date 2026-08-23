@@ -1,6 +1,6 @@
 # System Grafików Medycznych 🏥
 
-Zaawansowana aplikacja desktopowa do zarządzania harmonogramami pracowników placówek medycznych (szpitale, kliniki, poradnie). System pozwala na planowanie, organizację i monitorowanie grafików pracowników medycznych z obsługą różnych typów zmian, oddziałów, norm miesięcznych i rozliczeń kwartalnych.
+Zaawansowana aplikacja desktopowa do zarządzania harmonogramami pracowników placówek medycznych (szpitale, kliniki, poradnie). System pozwala na planowanie, organizację i monitorowanie grafików pracowników medycznych z obsługą różnych typów zmian, oddziałów, norm miesięcznych i rozliczeń kwartalnych. Oferuje również moduł urlopów i zwolnień L4, automatyczne planowanie kwartałów (Auto-Planer), tryb życzeń pracowników oraz walidator zgodności z normami odpoczynku na żywo.
 
 ## 📋 Spis treści
 
@@ -23,7 +23,7 @@ Zaawansowana aplikacja desktopowa do zarządzania harmonogramami pracowników pl
 
 ### Identyfikator
 - **Nazwa wewnętrzna**: `com.skaskiewicz.grafik-medyczny`
-- **Wersja**: 0.3.1
+- **Wersja**: 0.4.0
 - **Status**: Stabilna wersja produkcyjna
 
 ## Przeznaczenie
@@ -56,6 +56,30 @@ Aplikacja bazuje na kodach literowych, które można dowolnie edytować globalni
 - **W** - Dzień W (455 minut)
 - **L4** - Zwolnienie Lekarskie (0 minut)
 - **UP** - Urlop Wypoczynkowy (0 minut)
+
+### 🏖️ Moduł Urlopów i Zwolnień L4
+- Planowanie nieobecności zakresem dat z automatycznym wstawianiem do grafiku jednym kliknięciem.
+- Bogaty słownik nieobecności: urlop wypoczynkowy (UP), na żądanie (UW), okolicznościowy (OK), bezpłatny (BZ), macierzyński (MAC), ojcowski (OJC), rodzicielski (ROD), wychowawczy (WYCH), opieka (OP), opiekuńczy (OPI), dni na poszukiwanie pracy (PWP), siła wyższa (SW), szkoleniowe (SZK), krwiodawstwo (KRW) oraz zwolnienia lekarskie (L4).
+- Inteligentne rozliczanie: urlopy wypoczynkowe liczone wyłącznie w dni robocze (omijają weekendy i święta), a L4 w dni kalendarzowe ciągłe.
+- Przejrzysty widok w dwóch zakładkach: **Lista nieobecności** (filtry dowolnego roku i miesiąca, statusy: zakończony / aktywny / przyszły) oraz **Kalendarz** z wizualizacją nieobecności całego oddziału.
+- Roczny kalendarz urlopów w profilu pracownika oraz wpisy chronione przed nadpisaniem przez Auto-Planer.
+
+### ✨ Auto-Planer i Tryb Życzeń
+- **Auto-Planer (Kwartał)** automatycznie optymalizuje cały 3-miesięczny kwartał: utrzymuje zrównoważony czas pracy w 1. i 2. miesiącu, a w 3. miesiącu domyka bilans kwartału idealnie do 0:00.
+- Kreator dyżurów wyrównawczych wskaże brakujące minuty i przeprowadzi przez ich uzupełnienie.
+- **Tryb Życzeń**: kliknięcie w komórkę grafiku pozwala zapisać preferencję pracownika z uwzględnieniem pory dnia - od blokady ("Nie może pracować"), przez "Wolałby unikać" i "Bardzo chętnie", po sztywne przypisanie ("Musi pracować").
+- Życzenia są uwzględniane przez Auto-Planer podczas generowania grafiku.
+
+### 🎯 Zapotrzebowanie Obsady
+- Definiowanie minimalnej liczby personelu na poszczególnych dyżurach w podziale na dni robocze, soboty i święta.
+- Wersjonowane szablony - zmiany zapisane na stałe obowiązują w przyszłości, a historia poprzednich miesięcy pozostaje nienaruszona.
+- Walidator grafiku na żywo sygnalizuje niedobory kadrowe na dany dzień.
+
+### 📋 Rodzaje umów i Stałe Reguły
+- Obsługa typów umów: **UoP** (Umowa o Pracę), **B2B** (Kontrakt) i **UZ** (Zlecenie).
+- Automatyczne egzekwowanie 11-godzinnego odpoczynku dobowego (Art. 132 KP) dla pracowników na UoP.
+- Stałe reguły dostępności pracowników (np. "Nigdy nie może pracować w weekendy" albo "Bardzo chętnie bierze dyżury nocne") respektowane przy planowaniu.
+- Walidator Grafiku na Żywo analizuje zmiany na bieżąco i ostrzega o złamaniu 11h odpoczynku, nachodzących na siebie dyżurach oraz niedoborach kadrowych.
 
 ### 💾 Baza danych i Integracje
 - Wbudowana lekka baza SQLite działająca w 100% offline, co gwarantuje pełną prywatność i bezpieczeństwo danych personelu.
@@ -92,6 +116,22 @@ Aplikacja bazuje na kodach literowych, które można dowolnie edytować globalni
 - Wyeksportuj pusty szablon CSV dla wybranego roku.
 - Wypełnij plik w programie Excel (wklejając dane ze starych systemów) i zaimportuj go z powrotem jednym kliknięciem.
 
+### Urlopy i zwolnienia L4
+- Kliknij przycisk **"🏖️ Urlopy / L4"** na górnym pasku grafiku.
+- Wybierz pracownika i typ nieobecności, wskaż zakres dat ("od–do") i kliknij **"+ Wstaw do grafiku"**.
+- W zakładce Kalendarz sprawdzisz nieobecności całego oddziału, a w Profilu Pracownika zobaczysz roczny kalendarz urlopów danej osoby.
+
+### Automatyczne planowanie
+- Użyj przycisku **"✨ Auto-Planer (kwartał)"**, aby system sam rozplanował cały kwartał z uwzględnieniem etatów, życzeń, urlopów i zapotrzebowania obsady.
+- W 3. miesiącu kwartału bilans jest domykany do 0:00; w razie potrzeby kreator przeprowadzi Cię przez dodanie dyżuru wyrównawczego.
+
+### Życzenia pracowników
+- Przełącz się w **"💚 Tryb Życzeń"** (przełącznik obok zakładki "Grafik") i klikaj w dni w grafiku, aby zapisywać preferencje: blokady, unikanie, chęci lub sztywne przypisania - z wyborem pory dnia.
+
+### Zapotrzebowanie obsady
+- Przycisk **"🎯 Zapotrzebowanie"** pozwala określić minimalną obsadę dla każdego dyżuru (dni robocze, soboty, święta).
+- Walidator na górze grafiku na bieżąco ostrzeże o niedoborach i złamaniu norm odpoczynku.
+
 ### Drukowanie
 - Gdy grafik jest gotowy, kliknij przycisk **"🖨️ Drukuj"**.
 - Wybierz, czy chcesz wydrukować tylko wybrany miesiąc, czy kompleksowe rozliczenie całego kwartału.
@@ -99,11 +139,25 @@ Aplikacja bazuje na kodach literowych, które można dowolnie edytować globalni
 
 ## Zrzuty ekranu
 
-![Zrzut ekranu 1](docs/images/screenshot01.png)
+**Menu główne** – wybór roku i kwartału, oddziały, globalny słownik dyżurów i zarządzanie bazą danych:
 
-![Zrzut ekranu 2](docs/images/screenshot02.png)
+![Menu główne](docs/images/screenshot01.png)
 
-![Zrzut ekranu 3](docs/images/screenshot03.png)
+**Grafik kwartalny** – normy dobowe, miesięczne i kwartalne, bilans godzin oraz legenda dyżurów; na pasku nowe moduły: Urlopy / L4, Zapotrzebowanie, Auto-planer i Tryb Życzeń:
+
+![Grafik kwartalny](docs/images/screenshot02.png)
+
+**Moduł Urlopów i Zwolnień L4** – planowanie nieobecności zakresem dat z listą i kalendarzem:
+
+![Moduł Urlopów i Zwolnień L4](docs/images/screenshot04.png)
+
+**Profil pracownika** – rodzaj umowy, stałe reguły dostępności oraz zakładka Urlopy z rocznym kalendarzem:
+
+![Profil pracownika](docs/images/screenshot05.png)
+
+**Wydruk miesięczny** – czyste, sformatowane zestawienie gotowe do podpisu:
+
+![Wydruk miesięczny](docs/images/screenshot03.png)
 
 ## Architektura
 
@@ -142,6 +196,11 @@ Wtyczki Tauri:
 - ✅ Pełna edycja globalnych i lokalnych (miesięcznych) słowników dyżurów.
 - ✅ Inteligentne, automatyczne wyliczanie polskich świąt i weekendów.
 - ✅ Automatyczne zliczanie wypracowanych minut, bilansu miesięcznego i kwartalnego.
+- ✅ Moduł urlopów i zwolnień L4 z planowaniem zakresem dat, listą i kalendarzem nieobecności.
+- ✅ Auto-Planer kwartału z automatycznym domykaniem bilansu i dyżurami wyrównawczymi.
+- ✅ Tryb Życzeń - rejestrowanie preferencji i blokad pracowników z podziałem na pory dnia.
+- ✅ Zapotrzebowanie obsady (minimalne stany osobowe na dyżurach) z wersjonowanymi szablonami.
+- ✅ Rodzaje umów (UoP / B2B / UZ) z kontrolą 11-godzinnego odpoczynku dobowego i walidatorem grafiku na żywo.
 - ✅ Import oraz Eksport rocznych grafików do plików CSV (wsparcie dla MS Excel).
 - ✅ Drukowanie zoptymalizowanych zestawień miesięcznych i kwartalnych.
 - ✅ Przenoszenie pliku bazy danych (wsparcie dla dysków sieciowych / chmury publicznej).
@@ -168,7 +227,7 @@ Jeśli chcielibyście w ten symboliczny sposób podziękować za program, bardzo
 Jeśli napotkasz błąd, problem lub chcesz zaproponować nową funkcjonalność, zachęcam do kontaktu poprzez zakładkę **Issues** w repozytorium projektu na GitHubie lub bezpośredni kontakt mailowy: sgm.kontakt@mailplus.pl.
 
 ### Informacje, które warto załączyć przy zgłoszeniu:
-- **Wersja aplikacji**: 0.3.1
+- **Wersja aplikacji**: 0.4.0
 - **System operacyjny**: np. Windows 11
 - **Opis problemu**: Szczegółowy opis tego, co się stało.
 - **Kroki do reprodukcji**: Krok po kroku, jak powtórzyć błąd.
